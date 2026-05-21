@@ -257,7 +257,7 @@ function fetchWithTimeout(url, options = {}, timeout = 6000) {
     return `
       <article class="movie-card" data-movie-card data-id="${escapeAttr(id)}" tabindex="0">
         <div class="movie-poster">
-         <img src="${escapeAttr(posterUrl(posterPath, "w185", title))}"
+         <img src="${escapeAttr(posterUrl(posterPath, "w342", title))}"
      loading="lazy"
      decoding="async"
      alt="${escapeAttr(title)} poster"
@@ -413,15 +413,15 @@ function fetchWithTimeout(url, options = {}, timeout = 6000) {
     initSearch();
   }
 
-  async function initHome() {
+async function initHome() {
   renderStudios();
   renderEvergreenTabs();
   renderEvergreen("all");
   renderRoomsPreview();
 
   await Promise.allSettled([
-    loadRow("trending/movie/week", "trendingRow", 8),
-    loadRow(`movie/upcoming?region=${REGION}`, "upcomingRow", 8),
+    loadRow("trending/movie/week", "trendingRow", 6),
+    loadRow(`movie/upcoming?region=${REGION}`, "upcomingRow", 6),
     loadHeroPosters()
   ]);
 }
@@ -611,28 +611,41 @@ function fetchWithTimeout(url, options = {}, timeout = 6000) {
     tag.textContent = "THE CRAWL";
   }
 
-  async function loadResults(page, clear) {
-    const grid = $("#moviesGrid");
-    const loadMore = $("#loadMoreBtn");
-    if (!grid) return;
-    if (clear) showLoading(grid);
-    if (loadMore) loadMore.disabled = true;
+ async function loadResults(page, clear) {
+  const grid = $("#moviesGrid");
+  const loadMore = $("#loadMoreBtn");
+  if (!grid) return;
 
-    try {
-      const data = await tmdbFetch(currentResultsEndpoint(page));
-      const html = (data.results || []).map(movie => buildCard(movie)).join("");
-      if (clear) grid.innerHTML = html || `<div class="empty-state">No movies found.</div>`;
-      else grid.insertAdjacentHTML("beforeend", html);
-      appState.resultsPage = page;
-      if (loadMore) {
-        const hasMore = Number(data.total_pages || 0) > page;
-        loadMore.hidden = !hasMore;
-        loadMore.disabled = !hasMore;
-      }
-    } catch {
-      showErrorState(grid);
+  if (clear) showLoading(grid);
+  if (loadMore) loadMore.disabled = true;
+
+  try {
+    const data = await tmdbFetch(currentResultsEndpoint(page));
+
+    const movies = data.results || [];
+
+    // show only 8 movies from each API page
+    const moviesToShow = movies.slice(0, 8);
+
+    const html = moviesToShow.map(movie => buildCard(movie)).join("");
+
+    if (clear) {
+      grid.innerHTML = html || `<div class="empty-state">No movies found.</div>`;
+    } else {
+      grid.insertAdjacentHTML("beforeend", html);
     }
+
+    appState.resultsPage = page;
+
+    if (loadMore) {
+      const hasMore = Number(data.total_pages || 0) > page;
+      loadMore.hidden = !hasMore;
+      loadMore.disabled = !hasMore;
+    }
+  } catch {
+    showErrorState(grid);
   }
+}
 
   async function initDetails() {
     const movieId = localStorage.getItem("selectedMovieId") || new URLSearchParams(location.search).get("id");
@@ -798,7 +811,7 @@ function fetchWithTimeout(url, options = {}, timeout = 6000) {
     return `
       <section class="panel">
         <div class="section-head"><h2 class="section-title" style="font-size:2rem">Similar movies</h2></div>
-        <div class="movie-row">${movies.slice(0, 12).map(movie => buildCard(movie)).join("")}</div>
+        <div class="movie-row">${movies.slice(0, 6).map(movie => buildCard(movie)).join("")}</div>
       </section>`;
   }
 
