@@ -37,7 +37,7 @@
           <input class="form-input" id="siPassword" type="password" autocomplete="current-password">
         </div>
         <p class="error-msg" id="siError" style="margin-top:12px">Wrong username or password.</p>
-        <button class="btn-primary" style="width:100%; margin-top:18px" type="button" data-action="sign-in">Enter</button>
+        <button class="btn-primary" style="width:100%; margin-top:18px" type="button" onclick="localStorage.setItem('userSession','Guest'); window.location.href='index.html';">Enter</button>
       </div>
 
       <div id="formSignUp" hidden>
@@ -72,7 +72,7 @@
         <span>G</span>
         Continue with Google
       </button>
-      <button class="btn-secondary" style="width:100%" type="button" data-action="guest-login">Continue as Guest</button>
+      <button class="btn-secondary" style="width:100%" type="button" onclick="localStorage.setItem('userSession','Guest'); window.location.href='index.html';">Continue as Guest</button>
     </section>
   </main>
 </body>
