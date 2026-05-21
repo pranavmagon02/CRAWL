@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Profile | CineCrawl</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="profile">
+  <nav class="navbar">
+    <a href="index.html" class="logo"><span class="logo-mark">CC</span><span>CineCrawl</span></a>
+    <button class="icon-button nav-toggle" type="button" data-action="toggle-nav">Menu</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="crawl.html">The Crawl</a>
+      <a href="chatrooms.html">CineRooms</a>
+      <a href="results.html?mode=upcoming">Upcoming</a>
+    </div>
+    <div class="nav-tools">
+      <div class="nav-search">
+        <span class="search-icon">S</span>
+        <input type="search" id="searchInput" placeholder="Search movies" autocomplete="off">
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+      <button class="btn-secondary" type="button" data-action="logout">Exit</button>
+    </div>
+  </nav>
+
+  <main class="page-shell profile-page">
+    <section class="panel profile-header">
+      <button class="icon-button" type="button" data-action="open-avatar" style="width:auto; height:auto; padding:0; border-radius:50%">
+        <img class="profile-avatar" id="profilePic" src="" alt="Profile avatar">
+      </button>
+      <div class="profile-meta">
+        <span class="eyebrow">Profile</span>
+        <h1 id="profileName">Loading</h1>
+        <p class="muted" id="profileHandle"></p>
+        <div class="metrics">
+          <div class="metric-box"><strong id="statFavs">0</strong><span>Saved</span></div>
+          <div class="metric-box"><strong id="statWatched">0</strong><span>Watched</span></div>
+          <div class="metric-box"><strong id="statReviews">0</strong><span>Reviews</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Preferences</span>
+          <h2 class="section-title" style="font-size:2rem">Taste profile</h2>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="inputName">Display name</label>
+          <input class="form-input" id="inputName" type="text" placeholder="Your display name">
+        </div>
+        <div class="form-field">
+          <label for="inputActor">Favorite actor</label>
+          <input class="form-input" id="inputActor" type="text" placeholder="Actor">
+        </div>
+        <div class="form-field">
+          <label for="inputDirector">Favorite director</label>
+          <input class="form-input" id="inputDirector" type="text" placeholder="Director">
+        </div>
+        <div class="form-field">
+          <label for="inputStudio">Favorite studio</label>
+          <input class="form-input" id="inputStudio" type="text" placeholder="Studio">
+        </div>
+      </div>
+      <div class="form-field" style="margin-top:18px">
+        <label>Favorite genres</label>
+        <div class="tag-group" id="genreTags"></div>
+      </div>
+      <div class="profile-actions" style="margin-top:20px">
+        <button class="btn-primary" type="button" data-action="save-profile">Save profile</button>
+        <button class="btn-secondary" type="button" data-action="reset-profile">Reset</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="profile-tabs">
+        <button class="tab-btn active" type="button" data-action="profile-tab" data-profile-tab="favs">Saved</button>
+        <button class="tab-btn" type="button" data-action="profile-tab" data-profile-tab="watched">Watched</button>
+        <button class="tab-btn" type="button" data-action="profile-tab" data-profile-tab="reviews">Reviews</button>
+      </div>
+      <div class="profile-panel" id="panel-favs">
+        <div class="results-grid" id="favsGrid"></div>
+      </div>
+      <div class="profile-panel" id="panel-watched" hidden>
+        <div class="results-grid" id="watchedGrid"></div>
+      </div>
+      <div class="profile-panel" id="panel-reviews" hidden>
+        <div id="reviewsList"></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-wrap" id="avatarModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">Avatar</span>
+          <h2>Choose profile image</h2>
+        </div>
+        <button class="icon-button" type="button" data-action="close-modal">x</button>
+      </div>
+      <div class="avatar-grid" id="avatarGrid"></div>
+      <div class="form-field" style="margin-top:18px">
+        <label for="customAvatarInput">Custom image URL</label>
+        <input class="form-input" id="customAvatarInput" type="url" placeholder="https://">
+      </div>
+      <div class="profile-actions" style="margin-top:14px">
+        <button class="btn-primary" type="button" data-action="apply-avatar">Apply URL</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

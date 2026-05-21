@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login | CineCrawl</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="login">
+  <main class="login-page">
+    <section class="login-art">
+      <span class="eyebrow">CineCrawl access</span>
+      <h1 class="login-title">Enter the <span style="color:var(--mint)">cinema grid</span></h1>
+      <p class="login-sub">Track films, build a profile, save watchlists and talk inside CineRooms.</p>
+      <div class="stats-strip">
+        <div class="stat-tile"><strong>Save</strong><span>favorite titles</span></div>
+        <div class="stat-tile"><strong>Rate</strong><span>your own log</span></div>
+        <div class="stat-tile"><strong>Chat</strong><span>inside rooms</span></div>
+      </div>
+    </section>
+
+    <section class="login-card">
+      <div class="logo" style="margin-bottom:24px"><span class="logo-mark">CC</span><span>CineCrawl</span></div>
+      <div class="tab-row">
+        <button class="tab-btn active" id="btnSignIn" type="button" data-action="login-tab" data-tab="signin">Sign in</button>
+        <button class="tab-btn" id="btnSignUp" type="button" data-action="login-tab" data-tab="signup">Create</button>
+      </div>
+
+      <div id="formSignIn">
+        <div class="form-field">
+          <label for="siUsername">Email or username</label>
+          <input class="form-input" id="siUsername" type="text" autocomplete="username" placeholder="you@example.com">
+        </div>
+        <div class="form-field" style="margin-top:14px">
+          <label for="siPassword">Password</label>
+          <input class="form-input" id="siPassword" type="password" autocomplete="current-password">
+        </div>
+        <p class="error-msg" id="siError" style="margin-top:12px">Wrong username or password.</p>
+        <button class="btn-primary" style="width:100%; margin-top:18px" type="button" data-action="sign-in">Enter</button>
+      </div>
+
+      <div id="formSignUp" hidden>
+        <div class="form-field">
+          <label for="suName">Name</label>
+          <input class="form-input" id="suName" type="text" autocomplete="name">
+        </div>
+        <div class="form-field" style="margin-top:14px">
+          <label for="suEmail">Email</label>
+          <input class="form-input" id="suEmail" type="email" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="form-field" style="margin-top:14px">
+          <label for="suUsername">Username</label>
+          <input class="form-input" id="suUsername" type="text" autocomplete="username">
+        </div>
+        <div class="form-field" style="margin-top:14px">
+          <label for="suPassword">Password</label>
+          <input class="form-input" id="suPassword" type="password" autocomplete="new-password" aria-describedby="passwordRules">
+        </div>
+        <div class="password-rules" id="passwordRules">
+          <span data-rule="length">8+ characters</span>
+          <span data-rule="case">upper and lower case</span>
+          <span data-rule="number">number</span>
+          <span data-rule="symbol">symbol</span>
+        </div>
+        <p class="error-msg" id="suError" style="margin-top:12px"></p>
+        <button class="btn-primary" style="width:100%; margin-top:18px" type="button" data-action="sign-up">Create account</button>
+      </div>
+
+      <hr class="divider">
+      <button class="btn-secondary google-btn" style="width:100%; margin-bottom:12px" type="button" data-action="google-login">
+        <span>G</span>
+        Continue with Google
+      </button>
+      <button class="btn-secondary" style="width:100%" type="button" data-action="guest-login">Continue as Guest</button>
+    </section>
+  </main>
+</body>
+</html>

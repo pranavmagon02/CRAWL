@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CineRooms | CineCrawl</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="chatrooms">
+  <nav class="navbar">
+    <a href="index.html" class="logo"><span class="logo-mark">CC</span><span>CineCrawl</span></a>
+    <button class="icon-button nav-toggle" type="button" data-action="toggle-nav">Menu</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="crawl.html">The Crawl</a>
+      <a href="chatrooms.html">CineRooms</a>
+      <a href="results.html?mode=upcoming">Upcoming</a>
+    </div>
+    <div class="nav-tools">
+      <div class="nav-search">
+        <span class="search-icon">S</span>
+        <input type="search" id="searchInput" placeholder="Search movies" autocomplete="off">
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+      <a href="profile.html" aria-label="Profile"><img id="navAvatar" class="avatar-link" src="" alt=""></a>
+      <button class="btn-secondary" type="button" data-action="logout">Exit</button>
+    </div>
+  </nav>
+
+  <main class="chat-layout">
+    <aside class="rooms-sidebar">
+      <div class="rooms-head">
+        <span class="eyebrow">CineRooms</span>
+        <h1 style="margin:8px 0 14px">Live rooms</h1>
+        <div class="sync-badge" id="syncStatus">Checking live server</div>
+        <div class="nav-search" style="min-width:0">
+          <span class="search-icon">S</span>
+          <input type="search" id="roomSearchBox" placeholder="Search rooms" autocomplete="off">
+        </div>
+      </div>
+      <div class="rooms-list" id="roomsList"></div>
+      <div style="padding:12px">
+        <button class="btn-primary" style="width:100%" type="button" data-action="create-room-modal">Create room</button>
+      </div>
+    </aside>
+
+    <section class="chat-panel" id="chatPanel">
+      <div class="chat-empty">
+        <div>
+          <span class="eyebrow">Select a room</span>
+          <h2 style="margin-top:12px">CineRooms is ready</h2>
+          <p class="muted" style="margin-top:8px">Pick a room from the list or create a new community space.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-wrap" id="createRoomModal">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <span class="eyebrow">Create room</span>
+          <h2>Launch a movie room</h2>
+        </div>
+        <button class="icon-button" type="button" data-action="close-modal">x</button>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field">
+          <label for="roomNameInput">Room name</label>
+          <input class="form-input" id="roomNameInput" maxlength="44" placeholder="Example: Neo Noir Club">
+        </div>
+        <div class="form-field">
+          <label for="roomSlugInput">Room link</label>
+          <input class="form-input" id="roomSlugInput" maxlength="36" placeholder="neo-noir-club">
+        </div>
+      </div>
+
+      <div class="form-field" style="margin-top:14px">
+        <label for="roomDescInput">Description</label>
+        <textarea class="form-input" id="roomDescInput" maxlength="180" placeholder="What will this room discuss?"></textarea>
+      </div>
+
+      <div class="form-field" style="margin-top:14px">
+        <label>Room code</label>
+        <div class="chip-row" id="roomCodeChoices"></div>
+      </div>
+
+      <div class="form-field" style="margin-top:14px">
+        <label>Category</label>
+        <div class="chip-row" id="roomCategoryChoices"></div>
+      </div>
+
+      <div class="form-field" style="margin-top:14px">
+        <label>Who can join?</label>
+        <div class="chip-row">
+          <button class="chip active" type="button" data-action="pick-room-access" data-access="public">Anyone with link</button>
+          <button class="chip" type="button" data-action="pick-room-access" data-access="request">Request approval</button>
+        </div>
+      </div>
+
+      <label class="tag" style="margin-top:18px; display:inline-flex; gap:10px; cursor:pointer">
+        <input type="checkbox" id="rulesCheckbox">
+        I agree to keep the room respectful and spoiler-aware.
+      </label>
+
+      <p class="form-error" id="createRoomError" style="margin-top:12px"></p>
+
+      <div class="profile-actions" style="margin-top:20px">
+        <button class="btn-primary" type="button" data-action="create-room">Create room</button>
+        <button class="btn-secondary" type="button" data-action="close-modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

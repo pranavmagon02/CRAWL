@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Results | CineCrawl</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="results">
+  <nav class="navbar">
+    <a href="index.html" class="logo"><span class="logo-mark">CC</span><span>CineCrawl</span></a>
+    <button class="icon-button nav-toggle" type="button" data-action="toggle-nav">Menu</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="crawl.html">The Crawl</a>
+      <a href="chatrooms.html">CineRooms</a>
+      <a href="results.html?mode=upcoming">Upcoming</a>
+    </div>
+    <div class="nav-tools">
+      <div class="nav-search">
+        <span class="search-icon">S</span>
+        <input type="search" id="searchInput" placeholder="Search movies" autocomplete="off">
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+      <a href="profile.html" aria-label="Profile"><img id="navAvatar" class="avatar-link" src="" alt=""></a>
+      <button class="btn-secondary" type="button" data-action="logout">Exit</button>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <header class="results-header">
+      <div>
+        <span class="eyebrow" id="pageTag">Results</span>
+        <h1 class="page-title" id="pageTitle">Loading</h1>
+        <p class="section-sub" id="pageSubtitle"></p>
+      </div>
+    </header>
+    <section class="results-grid" id="moviesGrid"></section>
+    <div style="display:grid; place-items:center; margin-top:28px">
+      <button class="btn-primary" type="button" id="loadMoreBtn" data-action="load-more" hidden>Load more</button>
+    </div>
+  </main>
+</body>
+</html>

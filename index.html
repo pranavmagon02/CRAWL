@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CineCrawl | Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body data-page="home">
+  <nav class="navbar">
+    <a href="index.html" class="logo"><span class="logo-mark">CC</span><span>CineCrawl</span></a>
+    <button class="icon-button nav-toggle" type="button" data-action="toggle-nav">Menu</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="crawl.html">The Crawl</a>
+      <a href="chatrooms.html">CineRooms</a>
+      <a href="results.html?mode=upcoming">Upcoming</a>
+    </div>
+    <div class="nav-tools">
+      <div class="nav-search">
+        <span class="search-icon">S</span>
+        <input type="search" id="searchInput" placeholder="Search movies" autocomplete="off">
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+      <a href="profile.html" aria-label="Profile"><img id="navAvatar" class="avatar-link" src="" alt=""></a>
+      <button class="btn-secondary" type="button" data-action="logout">Exit</button>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Cinematic discovery grid</span>
+        <h1 class="hero-title">Track the signal inside your <span>movie universe</span></h1>
+        <p class="hero-copy">Find movies by mood, studio, release window and community taste. Build a watchlist that moves from classics to fresh premieres without losing the thread.</p>
+        <div class="hero-actions">
+          <a href="crawl.html" class="btn-primary">Start The Crawl</a>
+          <a href="results.html?mode=upcoming" class="btn-secondary">Upcoming Movies</a>
+          <a href="chatrooms.html" class="btn-secondary">Open CineRooms</a>
+        </div>
+        <div class="stats-strip">
+          <div class="stat-tile"><strong>4</strong><span>movie lanes</span></div>
+          <div class="stat-tile"><strong>12</strong><span>studio portals</span></div>
+          <div class="stat-tile"><strong>24h</strong><span>watchlist momentum</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="poster-mosaic" id="heroPosters"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Studios</span>
+          <h2 class="section-title">Explore <span>universes</span></h2>
+        </div>
+      </div>
+      <div class="studio-grid" id="studioGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Weekly pulse</span>
+          <h2 class="section-title">Trending <span>now</span></h2>
+        </div>
+        <a href="results.html?mode=trending" class="btn-secondary">See all</a>
+      </div>
+      <div class="movie-row" id="trendingRow"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Release watch</span>
+          <h2 class="section-title">Upcoming <span>movies</span></h2>
+        </div>
+        <a href="results.html?mode=upcoming" class="btn-secondary">See all</a>
+      </div>
+      <div class="movie-row" id="upcomingRow"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Long-term signal</span>
+          <h2 class="section-title">Top <span>rated</span></h2>
+        </div>
+        <a href="results.html?mode=toprated" class="btn-secondary">See all</a>
+      </div>
+      <div class="movie-row" id="topRatedRow"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Evergreen</span>
+          <h2 class="section-title">Classics <span>matrix</span></h2>
+        </div>
+      </div>
+      <div class="filter-bar" id="evergreenTabs"></div>
+      <div class="poster-grid" id="evergreenGrid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Community</span>
+          <h2 class="section-title">CineRooms <span>online</span></h2>
+        </div>
+        <a href="chatrooms.html" class="btn-secondary">Browse rooms</a>
+      </div>
+      <div class="room-preview-grid" id="roomsPreview"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Current lane</span>
+          <h2 class="section-title">Now <span>playing</span></h2>
+        </div>
+        <a href="results.html?mode=nowplaying" class="btn-secondary">See all</a>
+      </div>
+      <div class="movie-row" id="nowPlayingRow"></div>
+    </section>
+  </main>
+</body>
+</html>
