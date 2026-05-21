@@ -455,7 +455,7 @@ function fetchWithTimeout(url, options = {}, timeout = 6000) {
       const data = await tmdbFetch("trending/movie/week");
       const posters = (data.results || []).filter(movie => movie.poster_path).slice(0, 6);
       holder.innerHTML = posters.map(movie => `
-        <img src="${escapeAttr(posterUrl(movie.poster_path, "w185", movieTitle(movie))))}" loading="lazy" decoding="async" alt="${escapeAttr(movieTitle(movie))}">`
+        <img src="${escapeAttr(posterUrl(movie.poster_path, "w185", movieTitle(movie)))}" loading="lazy" decoding="async" alt="${escapeAttr(movieTitle(movie))}">`
       ).join("");
     } catch {
       holder.innerHTML = EVERGREEN_MOVIES.slice(0, 9).map(movie => `
