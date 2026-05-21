@@ -171,7 +171,14 @@
       // Storage can be full or disabled. The app still works without cache.
     }
   }
-
+function fetchWithTimeout(url, options = {}, timeout = 6000) {
+  return Promise.race([
+    fetch(url, options),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Request timeout")), timeout)
+    )
+  ]);
+}
   async function tmdbFetch(endpoint, options = {}) {
     const ttl = options.ttl ?? SIX_HOURS;
     const url = new URL(endpoint, "https://api.themoviedb.org/3/");
@@ -181,12 +188,12 @@
     if (cached) return cached;
     if (inFlight.has(cacheKey)) return inFlight.get(cacheKey);
 
-    const request = fetch(url.toString(), {
+    const request = fetchWithTimeout(url.toString(), {
       headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-        "Content-Type": "application/json;charset=utf-8"
-      }
-    })
+  Authorization: `Bearer ${API_TOKEN}`,
+  "Content-Type": "application/json;charset=utf-8"
+}
+}, 6000)
       .then(async response => {
         if (!response.ok) throw new Error(`TMDB ${response.status}`);
         const data = await response.json();
@@ -250,13 +257,11 @@
     return `
       <article class="movie-card" data-movie-card data-id="${escapeAttr(id)}" tabindex="0">
         <div class="movie-poster">
-          <img src="${escapeAttr(posterUrl(posterPath, "w342", title))}"
-               srcset="${escapeAttr(posterUrl(posterPath, "w185", title))} 185w, ${escapeAttr(posterUrl(posterPath, "w342", title))} 342w, ${escapeAttr(posterUrl(posterPath, "w500", title))} 500w"
-               sizes="(max-width: 640px) 45vw, 190px"
-               loading="lazy"
-               decoding="async"
-               alt="${escapeAttr(title)} poster"
-               onerror="this.src='${escapeAttr(placeholderImage(title))}'">
+         <img src="${escapeAttr(posterUrl(posterPath, "w185", title))}"
+     loading="lazy"
+     decoding="async"
+     alt="${escapeAttr(title)} poster"
+     onerror="this.onerror=null; this.src='${escapeAttr(placeholderImage(title))}'">
           <div class="card-actions">
             <button class="card-action${watchedClass}" type="button" data-action="toggle-watched" data-id="${escapeAttr(id)}" data-title="${escapeAttr(title)}" data-poster="${escapeAttr(posterPath)}" aria-label="Toggle watched">Seen</button>
             <button class="card-action${favClass}" type="button" data-action="toggle-favorite" data-id="${escapeAttr(id)}" data-title="${escapeAttr(title)}" data-poster="${escapeAttr(posterPath)}" aria-label="Toggle saved">Save</button>
@@ -409,19 +414,17 @@
   }
 
   async function initHome() {
-    renderStudios();
-    renderEvergreenTabs();
-    renderEvergreen("all");
-    renderRoomsPreview();
+  renderStudios();
+  renderEvergreenTabs();
+  renderEvergreen("all");
+  renderRoomsPreview();
 
-    await Promise.allSettled([
-      loadRow("trending/movie/week", "trendingRow", 14),
-      loadRow("movie/top_rated", "topRatedRow", 14),
-      loadRow(`movie/upcoming?region=${REGION}`, "upcomingRow", 14),
-      loadRow(`movie/now_playing?region=${REGION}`, "nowPlayingRow", 14),
-      loadHeroPosters()
-    ]);
-  }
+  await Promise.allSettled([
+    loadRow("trending/movie/week", "trendingRow", 8),
+    loadRow(`movie/upcoming?region=${REGION}`, "upcomingRow", 8),
+    loadHeroPosters()
+  ]);
+}
 
   function renderStudios() {
     const grid = $("#studioGrid");
@@ -450,9 +453,9 @@
     if (!holder) return;
     try {
       const data = await tmdbFetch("trending/movie/week");
-      const posters = (data.results || []).filter(movie => movie.poster_path).slice(0, 9);
+      const posters = (data.results || []).filter(movie => movie.poster_path).slice(0, 6);
       holder.innerHTML = posters.map(movie => `
-        <img src="${escapeAttr(posterUrl(movie.poster_path, "w342", movieTitle(movie)))}" loading="lazy" decoding="async" alt="${escapeAttr(movieTitle(movie))}">`
+        <img src="${escapeAttr(posterUrl(movie.poster_path, "w185", movieTitle(movie))))}" loading="lazy" decoding="async" alt="${escapeAttr(movieTitle(movie))}">`
       ).join("");
     } catch {
       holder.innerHTML = EVERGREEN_MOVIES.slice(0, 9).map(movie => `
